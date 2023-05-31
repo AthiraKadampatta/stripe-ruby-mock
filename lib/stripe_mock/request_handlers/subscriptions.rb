@@ -183,6 +183,8 @@ module StripeMock
         case params[:status]
         when nil
           subs = subs.filter {|subscription| subscription[:status] != "canceled"}
+        when 'ended'
+          subs = subs.filter { |subscription| subscription[:status] == "canceled" || subscription[:status] == 'incomplete_expired' }
         when "all"
           # Include all subscriptions
         else
